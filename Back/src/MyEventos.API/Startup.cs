@@ -32,6 +32,7 @@ namespace MyEventos.API
                 context => context.UseSqlite(Configuration.GetConnectionString("Default"))
             );
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyEventos.API", Version = "v1" });
@@ -53,6 +54,10 @@ namespace MyEventos.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(_cors => _cors.AllowAnyHeader()
+                                      .AllowAnyMethod()
+                                      .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

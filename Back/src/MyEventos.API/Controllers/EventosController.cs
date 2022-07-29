@@ -11,12 +11,12 @@ namespace MyEventos.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EventoController : ControllerBase
+    public class EventosController : ControllerBase
     {
 
         private readonly DataContext _context;
 
-        public EventoController(DataContext context)
+        public EventosController(DataContext context)
         {
             _context = context;
             

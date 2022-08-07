@@ -1,6 +1,4 @@
-<h2>Eventos</h2>
-<hr />
-
+<app-titulo [titulo]="'Eventos'"></app-titulo>
 <div class="form-inline">
   <div class="form-grup mb-2">
     <label class="mr-2">Filtro: </label>
@@ -19,9 +17,9 @@
         <button
           class="btn btn-outline-light btn-sm"
           type="button"
-          (click)="exibirOcultar()"
-        >
-          {{ mostrarImg ? "Ocultar" : "Mostrar" }}
+          (click)="exibirOcultar()">
+          <i class="{{ mostrarImg ? 'fa fa-eye-slash'  : 'fa fa-eye' }}" ></i>
+          {{ mostrarImg ? "Ocultar" : "Exibir" }}
         </button>
       </th>
       <th>#</th>
@@ -43,21 +41,25 @@
           [style.margin.px]="margImg"
         />
       </td>
-      <td>{{ evento.eventoId }}</td>
+      <td>{{ evento.id }}</td>
       <td>{{ evento.tema }}</td>
       <td>{{ evento.local }}</td>
-      <td>{{ evento.dataEvento }}</td>
+      <td>{{ evento.dataEvento | DateFormatTime }}</td>
       <td>{{ evento.qtdPessoas }}</td>
-      <td>{{ evento.lote }}</td>
+      <td>{{ evento.lotes[0].nome}}</td>
       <td>
         <button
           class="btn btn-outline-primary btn-sm"
-          type="button"
-        >Editar</button>
+          type="button" ngbTooltip="Editar" data-toggle="modal123" data-target="#exampleModal"
+        >
+        <i class="fa fa-edit" ></i>
+      </button>
         <button
           class="btn btn-outline-danger btn-sm"
-          type="button"
-        >Excluir</button>
+          type="button" ngbTooltip="Excluir" (click)="openModal(template)"
+        >
+        <i class="fa fa-trash" ></i>
+        </button>
       </td>
     </tr>
   </tbody>
@@ -69,3 +71,27 @@
     </tr>
   </tfoot>
 </table>
+
+
+<!--Modal-->
+<ng-template #template>
+  <div class="modal-header">
+    <p>
+      Exclusão de evento
+    </p>
+  </div>
+  <div class="modal-body">
+    <p>
+      Deseja realmente realizar a exclusão deste item ?
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="decline()" >
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="confirm()" >
+      Excluir
+    </button>
+  </div>
+</ng-template>
+<!--ModalFim-->
